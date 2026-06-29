@@ -26,5 +26,11 @@
   //   file-size, max-functions, require-returns, no-any-returns,
   //   no-api-imports, type-exports-location, no-filter-in-query,
   //   no-collect-in-query, crud-structure
-  "errorRules": ["type-exports-location"]
+  "errorRules": ["type-exports-location"],
+
+  // Type-aware rules from @convex-dev/eslint-plugin (oxlint can't do type-aware).
+  // Enforced at edit time / commit via eslint_d (warm daemon = sub-second; first
+  // cold run pays a one-time ~14s prime). Requires eslint_d installed. Bare ids,
+  // e.g. "explicit-table-ids". Empty/omit to skip the eslint pass entirely.
+  "eslintErrorRules": []
 }
