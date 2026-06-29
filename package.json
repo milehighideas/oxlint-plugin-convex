@@ -11,7 +11,9 @@
     "README.md"
   ],
   "scripts": {
-    "test": "vitest run"
+    "test": "vitest run",
+    "change": "changie new",
+    "changelog": "changie batch auto && changie merge"
   },
   "keywords": [
     "oxlint",
