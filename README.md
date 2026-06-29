@@ -28,24 +28,28 @@ npm i -D @milehighideas/oxlint-plugin-convex
 }
 ```
 
-## Configure thresholds (`.pre-commit.json` → `convexCheckConfig`)
+## Configure (`.convex-lint.json`)
 
-Thresholds are read from the nearest `.pre-commit.json` so the IDE, an edit-time
-hook, a commit gate, and CI all agree on one source of truth:
+Config lives in a dedicated `.convex-lint.json` at the project root — the single
+source of truth shared by the IDE, an edit-time hook, a commit gate, and CI
+(it governs edit-time too, so it doesn't belong in a commit-only config):
 
 ```jsonc
 {
-  "convexCheckConfig": {
-    "maxLines": 400,
-    "maxFunctions": 8,
-    "crudDomains": [],
-    "excludePaths": ["_generated/", "schema/"]
-  }
+  "appPaths": ["packages/backend/convex"],
+  "excludePaths": ["_generated/", "schema/", "registry/", "migrations/"],
+  "maxLines": 400,
+  "maxFunctions": 8,
+  "crudDomains": [],
+  // rule ids that BLOCK (error); everything else is warning-only
+  "errorRules": ["type-exports-location"]
 }
 ```
 
-Resolution order per option: inline oxlint rule option → `.pre-commit.json`
-`convexCheckConfig` → built-in default (`maxLines: 400`, `maxFunctions: 8`).
+Resolution order per option: inline oxlint rule option → `.convex-lint.json`
+(or a `convexCheckConfig` block in `.pre-commit.json`, for back-compat) →
+built-in default (`maxLines: 400`, `maxFunctions: 8`). `errorRules` is consumed
+by the commit/edit-time gate, not the plugin itself.
 
 ## Rules
 
