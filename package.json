@@ -8,7 +8,8 @@
     "index.js",
     "lib/",
     "rules/",
-    "README.md"
+    "README.md",
+    ".convex-lint.json.example"
   ],
   "scripts": {
     "test": "vitest run",

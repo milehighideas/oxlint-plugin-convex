@@ -1,0 +1,30 @@
+{
+  // Copy to .convex-lint.json at your project root. This is the single source of
+  // truth for @milehighideas/oxlint-plugin-convex — read by the oxlint plugin
+  // (IDE + CI), the edit-time validate-convex hook, and the commit-time
+  // convexCheck gate. JSONC: comments and trailing commas are allowed.
+
+  // Which Convex files are in scope (substring match on the file path).
+  "appPaths": ["packages/backend/convex"],
+
+  // Skipped entirely (substring match). _generated/ and *.test.* are always
+  // skipped; list anything else here (schema/ and generated dirs are typical).
+  "excludePaths": ["_generated/", "schema/", "registry/", "migrations/"],
+
+  // Thresholds for the size rules.
+  "maxLines": 400, // file-size: flag files longer than this
+  "maxFunctions": 8, // max-functions: flag more registered Convex fns than this
+
+  // crud-structure (1 registered fn/file under create/read/update/delete) is
+  // enforced only for files whose path matches one of these. Empty = off.
+  "crudDomains": [],
+
+  // The ratchet: rule ids that BLOCK (error) on changed/edited files. Every
+  // other rule stays warning-only (visible in the IDE / reports, never blocks),
+  // so full-lint and CI don't trip on pre-existing violations. Add rules here
+  // one at a time as you clean each up. Available rule ids:
+  //   file-size, max-functions, require-returns, no-any-returns,
+  //   no-api-imports, type-exports-location, no-filter-in-query,
+  //   no-collect-in-query, crud-structure
+  "errorRules": ["type-exports-location"]
+}

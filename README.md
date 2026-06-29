@@ -46,8 +46,9 @@ source of truth shared by the IDE, an edit-time hook, a commit gate, and CI
 }
 ```
 
-Resolution order per option: inline oxlint rule option → `.convex-lint.json`
-(or a `convexCheckConfig` block in `.pre-commit.json`, for back-compat) →
+Copy [`.convex-lint.json.example`](./.convex-lint.json.example) to get started.
+
+Resolution order per option: inline oxlint rule option → `.convex-lint.json` →
 built-in default (`maxLines: 400`, `maxFunctions: 8`). `errorRules` is consumed
 by the commit/edit-time gate, not the plugin itself.
 
